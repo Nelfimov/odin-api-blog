@@ -33,6 +33,8 @@ customRouter.get('/:postID/comments', (req, res, next) => {
     if (!comments) {
       return res.json({message: 'No comments for this post found'});
     }
+
+    res.json(comments);
   });
 });
 
