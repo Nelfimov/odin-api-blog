@@ -119,7 +119,7 @@ const createComments = (cb) => {
         callback,
     ),
     (callback) => commentCreate(
-        users[1],
+        users[2],
         'Great!',
         posts[0],
         callback,
