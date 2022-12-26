@@ -14,9 +14,8 @@ customRouter.get('/', (req, res, next) => {
   });
 });
 
-// асинхронно запустить поиск поста и комментов через async
 customRouter.get('/:id', (req, res, next) => {
-  Post.findOne({id: req.params.id}, (err, post) => {
+  Post.findById(req.params.id, (err, post) => {
     if (err) return next(err);
 
     if (!post) {
@@ -35,6 +34,34 @@ customRouter.get('/:postID/comments', (req, res, next) => {
       return res.json({message: 'No comments for this post found'});
     }
   });
+});
+
+customRouter.get('/:postID/comments/:commentID', (req, res, next) => {
+  async.parallel(
+      {
+        post(callback) {
+          Post.findById(req.params.postID).exec(callback);
+        },
+        comment(callback) {
+          Comment.findById(req.params.commentID).exec(callback);
+        },
+      },
+      (err, results) => {
+        if (err) return next(err);
+
+        const {post, comment} = results;
+
+        if (!post) {
+          return res.json({message: 'No such post'});
+        };
+
+        if (!comment) {
+          return res.json({message: 'No such comment'});
+        };
+
+        return res.json(comment);
+      },
+  );
 });
 
 export default customRouter;

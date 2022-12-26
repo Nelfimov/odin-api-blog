@@ -7,6 +7,7 @@ import {fileURLToPath} from 'url';
 import mongoose, {connect} from 'mongoose';
 
 import indexRouter from './routes/index.js';
+import postRouter from './routes/post.js';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/posts', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,7 +49,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('pages/error');
+  res.send(err);
+  // res.render('pages/error');
 });
 
 export default app;
