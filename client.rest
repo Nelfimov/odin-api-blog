@@ -28,3 +28,14 @@ Content-Type: application/json
   "author": "63a9509afff3f745534d019e",
   "text": "Great test comment"
 }
+
+###
+
+POST http://localhost:3000/users/register/
+Content-Type: application/json
+
+{
+  "username": "8example",
+  "email": "8example@example.com",
+  "password": "123"
+}
