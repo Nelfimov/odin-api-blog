@@ -7,3 +7,24 @@ GET http://localhost:3000/posts/63a9509afff3f745534d01a2/
 ###
 
 GET http://localhost:3000/posts/63a9509afff3f745534d01a2/comments/
+
+###
+
+POST http://localhost:3000/posts/
+Content-Type: application/json
+
+{
+  "title": "A new testing post",
+  "text": "This is just for testing purposes",
+  "author": "63a9509afff3f745534d019b"
+}
+
+###
+
+POST http://localhost:3000/posts/63a9509afff3f745534d01a2/comments/
+Content-Type: application/json
+
+{
+  "author": "63a9509afff3f745534d019e",
+  "text": "Great test comment"
+}

@@ -17,6 +17,16 @@ customRouter.get('/', (req, res, next) => {
 
         res.json(posts);
       });
+}).post('/', (req, res, next) => {
+  const {title, text, author} = req.body;
+
+  const post = new Post({title, text, author});
+
+  post.save((err) => {
+    if (err) return next(err);
+
+    res.json({message: 'Success, new post saved'});
+  });
 });
 
 customRouter.get('/:id', (req, res, next) => {
@@ -48,6 +58,18 @@ customRouter.get('/:postID/comments', (req, res, next) => {
 
         res.json(comments);
       });
+}).post('/:postID/comments', (req, res, next) => {
+  const {author, text} = req.body;
+
+  const comment = new Comment({
+    author, text, post: req.params.postID,
+  });
+
+  comment.save((err) => {
+    if (err) return next(err);
+
+    res.json({message: 'Success, new comment added'});
+  });
 });
 
 customRouter.get('/:postID/comments/:commentID', (req, res, next) => {
