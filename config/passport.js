@@ -20,7 +20,6 @@ customPassport.use(new JwtStrategy(opts, (req, payload, done) => {
     if (err) return done(err, false);
 
     if (user) {
-      console.log(user);
       req.user = user;
       return done(null, user);
     };

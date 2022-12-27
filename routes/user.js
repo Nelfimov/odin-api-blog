@@ -11,7 +11,10 @@ customRouter.get(
     '/protected',
     passport.authenticate('jwt', {session: false}),
     (req, res, next) => {
-      res.status(200).json({message: 'You are authorized', user: req.user});
+      res.status(200).json({
+        success: true,
+        message: 'You are authorized',
+      });
     },
 );
 
@@ -22,7 +25,7 @@ customRouter.post('/login', (req, res, next) => {
     if (err) return next(err);
 
     if (!user) {
-      return res.json({message: 'No such user found'});
+      return res.json({success: false, message: 'No such user found'});
     };
 
     bcrypt.compare(password, user.password, (err, success) => {
@@ -39,7 +42,7 @@ customRouter.post('/login', (req, res, next) => {
         });
       };
 
-      return res.json({message: 'Password is incorrect'});
+      return res.json({success: false, message: 'Password is incorrect'});
     });
   });
 });
@@ -72,6 +75,7 @@ customRouter.post('/register', (req, res, next) => {
       const jwt = issueJWT(user);
 
       return res.json({
+        success: true,
         message: 'Success, new user registered. You can now log in',
         user: user,
         token: jwt.token,
