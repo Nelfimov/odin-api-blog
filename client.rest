@@ -24,11 +24,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiN
 
 POST http://localhost:3000/posts/63a9509afff3f745534d01a2/comments/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiNDY0N2Q5NDY5ODk4NTFiNzkiLCJpYXQiOjE2NzIxMjcwMDYyNjQsImV4cCI6MTY3MjEyNzA5MjY2NH0.j7NR-JuaA72NE_21d9PEosmztIaPfXPa1N8nHe2O5Xk 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiNDY0N2Q5NDY5ODk4NTFiNzkiLCJpYXQiOjE2NzIxMjcwMDYyNjQsImV4cCI6MTY3MjEyNzA5MjY2NH0.j7NR-JuaA72NE_21d9PEosmztIaPfXPa1N8nHe2O5Xk
 
 {
-  "author": "63a9509afff3f745534d019e",
-  "text": "Great test comment"
+  "text": "Great test comment4"
 }
 
 ###
@@ -48,7 +47,7 @@ POST http://localhost:3000/users/login/
 Content-Type: application/json
 
 {
-  "username": "6example",
+  "username": "5example",
   "password": "123"
 }
 
@@ -56,4 +55,4 @@ Content-Type: application/json
 
 GET http://localhost:3000/users/protected/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiNDY0N2Q5NDY5ODk4NTFiNzkiLCJpYXQiOjE2NzIxMjcwMDYyNjQsImV4cCI6MTY3MjEyNzA5MjY2NH0.j7NR-JuaA72NE_21d9PEosmztIaPfXPa1N8nHe2O5Xk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmE4MWUzYWM1ZTdhMDY0ODI2YTciLCJpYXQiOjE2NzIxNDAxMDEwODYsImV4cCI6MTY3MjE0MDE4NzQ4Nn0.SytzbyVEHV0FHT_JH0ZOFxQwVcsUgqj_oxMIJVM8VII

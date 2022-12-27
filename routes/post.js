@@ -22,7 +22,7 @@ customRouter.get('/', (req, res, next) => {
     passport.authenticate('jwt', {session: false}),
     (req, res, next) => {
       if (!req.user.admin) {
-        res.status(401).json({message: 'You are not admin'});
+        res.status(401).json({success: false, message: 'You are not admin'});
       };
 
       const {title, text} = req.body;
@@ -35,7 +35,11 @@ customRouter.get('/', (req, res, next) => {
       post.save((err) => {
         if (err) return next(err);
 
-        res.json({message: 'Success, new post saved'});
+        res.json({
+          success: true,
+          message: 'Success, new post saved',
+          post,
+        });
       });
     },
 );
@@ -48,7 +52,10 @@ customRouter.get('/:id', (req, res, next) => {
         if (err) return next(err);
 
         if (!result) {
-          return res.json({message: 'Post not found under this ID'});
+          return res.json({
+            success: false,
+            message: 'Post not found under this ID',
+          });
         };
 
         res.json(result);
@@ -64,7 +71,10 @@ customRouter.get('/:postID/comments', (req, res, next) => {
         if (err) return next(err);
 
         if (!comments) {
-          return res.json({message: 'No comments for this post found'});
+          return res.json({
+            success: false,
+            message: 'No comments for this post found',
+          });
         }
 
         res.json(comments);
@@ -73,16 +83,18 @@ customRouter.get('/:postID/comments', (req, res, next) => {
     '/:postID/comments',
     passport.authenticate('jwt', {session: false}),
     (req, res, next) => {
-      const {author, text} = req.body;
+      const {text} = req.body;
+
+      console.log(req.user);
 
       const comment = new Comment({
-        author, text, post: req.params.postID,
+        text, author: req.user, post: req.params.postID,
       });
 
       comment.save((err) => {
         if (err) return next(err);
 
-        res.json({message: 'Success, new comment added'});
+        res.json({success: true, comment});
       });
     },
 );
@@ -107,14 +119,20 @@ customRouter.get('/:postID/comments/:commentID', (req, res, next) => {
         const {post, comment} = results;
 
         if (!post) {
-          return res.json({message: 'No such post'});
+          return res.json({
+            success: false,
+            message: 'No such post',
+          });
         };
 
         if (!comment) {
-          return res.json({message: 'No such comment'});
+          return res.json({
+            success: false,
+            message: 'No such comment',
+          });
         };
 
-        return res.json(comment);
+        return res.json({success: true, comment});
       },
   );
 });

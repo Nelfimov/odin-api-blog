@@ -12,13 +12,18 @@ const customPassport = passport;
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET,
+  passReqToCallback: true,
 };
 
-customPassport.use(new JwtStrategy(opts, (payload, done) => {
-  User.findOne({id: payload.sub}, (err, user) => {
+customPassport.use(new JwtStrategy(opts, (req, payload, done) => {
+  User.findById(payload.sub, (err, user) => {
     if (err) return done(err, false);
 
-    if (user) return done(null, user);
+    if (user) {
+      console.log(user);
+      req.user = user;
+      return done(null, user);
+    };
 
     return done(null, false);
   });

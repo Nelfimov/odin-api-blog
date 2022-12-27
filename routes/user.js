@@ -11,7 +11,7 @@ customRouter.get(
     '/protected',
     passport.authenticate('jwt', {session: false}),
     (req, res, next) => {
-      res.status(200).json({message: 'You are authorized'});
+      res.status(200).json({message: 'You are authorized', user: req.user});
     },
 );
 
