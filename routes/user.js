@@ -71,6 +71,10 @@ customRouter.post('/register', (req, res, next) => {
         username, email, password: hashedPassword,
       });
 
+      if (req.body.secret && req.body.secret === process.env.ADMIN_SECRET) {
+        user.admin = true;
+      };
+
       await user.save();
       const jwt = issueJWT(user);
 

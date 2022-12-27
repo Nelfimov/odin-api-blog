@@ -43,6 +43,18 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3000/users/register/
+Content-Type: application/json
+
+{
+  "username": "adminExample",
+  "email": "admin@example.com",
+  "password": "12345",
+  "secret": "is this the end my beautiful friend"
+}
+
+###
+
 POST http://localhost:3000/users/login/
 Content-Type: application/json
 
