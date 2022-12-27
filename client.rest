@@ -35,7 +35,23 @@ POST http://localhost:3000/users/register/
 Content-Type: application/json
 
 {
-  "username": "8example",
-  "email": "8example@example.com",
+  "username": "6example",
+  "email": "6example@example.com",
   "password": "123"
 }
+
+###
+
+POST http://localhost:3000/users/login/
+Content-Type: application/json
+
+{
+  "username": "6example",
+  "password": "123"
+}
+
+###
+
+GET http://localhost:3000/users/protected/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiNDY0N2Q5NDY5ODk4NTFiNzkiLCJpYXQiOjE2NzIxMjcwMDYyNjQsImV4cCI6MTY3MjEyNzA5MjY2NH0.j7NR-JuaA72NE_21d9PEosmztIaPfXPa1N8nHe2O5Xk
