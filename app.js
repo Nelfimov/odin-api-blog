@@ -1,6 +1,5 @@
 import createError from 'http-errors';
 import express, {json, urlencoded} from 'express';
-// import session from 'express-session';
 import {join, dirname} from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -32,14 +31,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(json());
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: {secure: false},
-// }));
 app.use(passport.initialize());
-// app.use(passport.session());
 app.use(urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
