@@ -12,10 +12,11 @@ GET http://localhost:3000/posts/63a9509afff3f745534d01a2/comments/
 
 POST http://localhost:3000/posts/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiNDY0N2Q5NDY5ODk4NTFiNzkiLCJpYXQiOjE2NzIxMjcwMDYyNjQsImV4cCI6MTY3MjEyNzA5MjY2NH0.j7NR-JuaA72NE_21d9PEosmztIaPfXPa1N8nHe2O5Xk
 
 {
   "title": "A new testing post",
-  "text": "This is just for testing purposes",
+  "text": "NEW test 3",
   "author": "63a9509afff3f745534d019b"
 }
 
@@ -23,6 +24,7 @@ Content-Type: application/json
 
 POST http://localhost:3000/posts/63a9509afff3f745534d01a2/comments/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2M2E5YmFiNDY0N2Q5NDY5ODk4NTFiNzkiLCJpYXQiOjE2NzIxMjcwMDYyNjQsImV4cCI6MTY3MjEyNzA5MjY2NH0.j7NR-JuaA72NE_21d9PEosmztIaPfXPa1N8nHe2O5Xk 
 
 {
   "author": "63a9509afff3f745534d019e",

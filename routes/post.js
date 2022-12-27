@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {Router as router} from 'express';
 import async from 'async';
-
+import passport from '../config/passport.js';
 import Post from '../models/post.js';
 import Comment from '../models/comment.js';
 import User from '../models/user.js';
@@ -17,17 +17,28 @@ customRouter.get('/', (req, res, next) => {
 
         res.json(posts);
       });
-}).post('/', (req, res, next) => {
-  const {title, text, author} = req.body;
+}).post(
+    '/',
+    passport.authenticate('jwt', {session: false}),
+    (req, res, next) => {
+      if (!req.user.admin) {
+        res.status(401).json({message: 'You are not admin'});
+      };
 
-  const post = new Post({title, text, author});
+      const {title, text} = req.body;
 
-  post.save((err) => {
-    if (err) return next(err);
+      const post = new Post({
+        title,
+        text,
+        author: req.user});
 
-    res.json({message: 'Success, new post saved'});
-  });
-});
+      post.save((err) => {
+        if (err) return next(err);
+
+        res.json({message: 'Success, new post saved'});
+      });
+    },
+);
 
 customRouter.get('/:id', (req, res, next) => {
   Post.findById(req.params.id)
@@ -58,19 +69,23 @@ customRouter.get('/:postID/comments', (req, res, next) => {
 
         res.json(comments);
       });
-}).post('/:postID/comments', (req, res, next) => {
-  const {author, text} = req.body;
+}).post(
+    '/:postID/comments',
+    passport.authenticate('jwt', {session: false}),
+    (req, res, next) => {
+      const {author, text} = req.body;
 
-  const comment = new Comment({
-    author, text, post: req.params.postID,
-  });
+      const comment = new Comment({
+        author, text, post: req.params.postID,
+      });
 
-  comment.save((err) => {
-    if (err) return next(err);
+      comment.save((err) => {
+        if (err) return next(err);
 
-    res.json({message: 'Success, new comment added'});
-  });
-});
+        res.json({message: 'Success, new comment added'});
+      });
+    },
+);
 
 customRouter.get('/:postID/comments/:commentID', (req, res, next) => {
   async.parallel(

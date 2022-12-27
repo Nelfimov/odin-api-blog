@@ -3,7 +3,6 @@ import Strategy from 'passport-jwt';
 import User from '../models/user.js';
 import * as dotenv from 'dotenv';
 
-
 dotenv.config();
 
 const JwtStrategy = Strategy.Strategy;
